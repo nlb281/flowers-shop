@@ -1,0 +1,40 @@
+﻿# Build folders
+bin/
+obj/
+
+# Rider
+.idea/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# VS Code
+.vscode/
+
+# Avalonia previewer
+*.pdb
+
+# NuGet
+packages/
+*.nupkg
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Publish
+publish/
+
+# Test results
+TestResults/
+
+# JetBrains Rider
+*.sln.iml
+
+# Avalonia generated files
+*.g.cs
