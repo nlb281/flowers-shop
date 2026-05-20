@@ -3,18 +3,207 @@
         xmlns:vm="using:flowersShop.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d"
+        d:DesignWidth="1400"
+        d:DesignHeight="800"
         x:Class="flowersShop.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
-        Icon="/Assets/avalonia-logo.ico"
-        Title="flowersShop">
+        Title="Flowers Shop">
 
     <Design.DataContext>
-        <!-- This only sets the DataContext for the previewer in an IDE,
-             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    <Grid ColumnDefinitions="3*,1.2*"
+          Margin="15"
+          ColumnSpacing="20">
+
+        <Grid Grid.Column="0"
+              RowDefinitions="Auto,Auto,*"
+              RowSpacing="15">
+            
+            <TextBlock
+                Grid.Row="0"
+                Text="Каталог букетов"
+                FontSize="30"
+                FontWeight="Bold"/>
+            
+            <CheckBox
+                Grid.Row="1"
+                Content="Только в наличии"
+                IsChecked="{Binding OnlyAvailable}"/>
+            
+            <ListBox
+                Grid.Row="2"
+                ItemsSource="{Binding Flowers}"
+                BorderThickness="0"
+                Background="Transparent"
+                ScrollViewer.VerticalScrollBarVisibility="Auto">
+                
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                
+                <ListBox.Styles>
+
+                    <Style Selector="ListBoxItem">
+                        <Setter Property="Padding" Value="0"/>
+                        <Setter Property="Margin" Value="0"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="Background" Value="Transparent"/>
+                    </Style>
+
+                    <Style Selector="ListBoxItem:selected">
+                        <Setter Property="Background" Value="Transparent"/>
+                    </Style>
+
+                    <Style Selector="ListBoxItem:pointerover">
+                        <Setter Property="Background" Value="Transparent"/>
+                    </Style>
+
+                </ListBox.Styles>
+                
+                <ListBox.ItemTemplate>
+
+                    <DataTemplate>
+
+                        <Border
+                            Width="230"
+                            Margin="10"
+                            Padding="12"
+                            BorderBrush="#D0D0D0"
+                            BorderThickness="1"
+                            CornerRadius="10">
+
+                            <StackPanel Spacing="10">
+
+                                <Image
+                                    Height="150"
+                                    Stretch="UniformToFill"
+                                    Source="{Binding ImagePath}"/>
+
+                                <TextBlock
+                                    Text="{Binding Name}"
+                                    FontSize="20"
+                                    FontWeight="Bold"
+                                    TextWrapping="Wrap"/>
+
+                                <TextBlock
+                                    Text="{Binding Description}"
+                                    TextWrapping="Wrap"
+                                    MaxHeight="60"/>
+
+                                <TextBlock
+                                    Text="{Binding Price, StringFormat='Цена: {0:F2} ₽'}"
+                                    FontWeight="Bold"
+                                    FontSize="16"/>
+
+                                <TextBlock
+                                    Text="{Binding Quantity, StringFormat='Остаток: {0}'}"/>
+
+                                <Button
+                                    Content="Добавить в корзину"
+                                    Height="40"
+                                    Click="AddToCart_OnClick"/>
+
+                            </StackPanel>
+
+                        </Border>
+
+                    </DataTemplate>
+
+                </ListBox.ItemTemplate>
+
+            </ListBox>
+
+        </Grid>
+
+        <Border Grid.Column="1"
+                Padding="15"
+                BorderBrush="#D0D0D0"
+                BorderThickness="1"
+                CornerRadius="10">
+
+            <Grid RowDefinitions="Auto,*,Auto,Auto,Auto"
+                  RowSpacing="15">
+                
+                <TextBlock
+                    Grid.Row="0"
+                    Text="Корзина"
+                    FontSize="28"
+                    FontWeight="Bold"/>
+                
+                <ListBox
+                    Grid.Row="1"
+                    ItemsSource="{Binding CartItems}"
+                    BorderThickness="0"
+                    Background="Transparent"
+                    ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    
+                    <ListBox.ItemTemplate>
+
+                        <DataTemplate>
+
+                            <Border
+                                Margin="0 0 0 10"
+                                Padding="10"
+                                BorderBrush="#D0D0D0"
+                                BorderThickness="1"
+                                CornerRadius="8">
+
+                                <StackPanel Spacing="8">
+                                    
+                                    <Image
+                                        Height="120"
+                                        Stretch="UniformToFill"
+                                        Source="{Binding ImagePath}"/>
+                                    
+                                    <TextBlock
+                                        Text="{Binding Name}"
+                                        FontWeight="Bold"
+                                        FontSize="16"
+                                        TextWrapping="Wrap"/>
+                                    
+                                    <TextBlock
+                                        Text="{Binding Quantity, StringFormat='Количество: {0}'}"/>
+                                    
+                                    <TextBlock
+                                        Text="{Binding TotalPrice, StringFormat='Сумма: {0:F2} ₽'}"
+                                        FontWeight="Bold"/>
+
+                                </StackPanel>
+
+                            </Border>
+
+                        </DataTemplate>
+
+                    </ListBox.ItemTemplate>
+
+                </ListBox>
+                
+                <TextBlock
+                    Grid.Row="2"
+                    Text="{Binding TotalPrice, StringFormat='Итого: {0:F2} ₽'}"
+                    FontSize="22"
+                    FontWeight="Bold"/>
+                
+                <Button
+                    Grid.Row="3"
+                    Height="45"
+                    Content="Оформить заказ"
+                    />
+
+                <Button
+                    Grid.Row="4"
+                    Height="45"
+                    Content="Просмотреть все заказы"/>
+
+            </Grid>
+
+        </Border>
+
+    </Grid>
 
 </Window>
