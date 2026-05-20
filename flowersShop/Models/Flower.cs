@@ -17,7 +17,7 @@ public partial class Flower
 
     public string Availability { get; set; } = null!;
 
-    public string Quantity { get; set; } = null!;
+    public int Quantity { get; set; }
 
     public virtual ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
 }

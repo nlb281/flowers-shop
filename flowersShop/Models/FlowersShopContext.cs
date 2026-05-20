@@ -31,7 +31,7 @@ public partial class FlowersShopContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Username=postgres;Password=root;Database=flowers_shop");
+        => optionsBuilder.UseNpgsql("Host=localhost;Port=5432;UserName=postgres;Password=root;DataBase=flowers_shop");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -109,9 +109,7 @@ public partial class FlowersShopContext : DbContext
             entity.Property(e => e.Price)
                 .HasPrecision(10, 2)
                 .HasColumnName("price");
-            entity.Property(e => e.Quantity)
-                .HasColumnType("character varying")
-                .HasColumnName("quantity");
+            entity.Property(e => e.Quantity).HasColumnName("quantity");
         });
 
         modelBuilder.Entity<Order>(entity =>
