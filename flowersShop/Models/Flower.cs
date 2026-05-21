@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Avalonia.Media.Imaging;
+using Avalonia.Platform;
 
 namespace flowersShop.Models;
 
@@ -14,6 +16,13 @@ public partial class Flower
     public decimal Price { get; set; }
 
     public string ImagePath { get; set; } = null!;
+    
+    public Bitmap ImageBitmap =>
+        new Bitmap(
+            AssetLoader.Open(
+                new Uri(ImagePath)
+            )
+        );
 
     public string Availability { get; set; } = null!;
 

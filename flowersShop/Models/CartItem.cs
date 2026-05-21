@@ -1,4 +1,7 @@
-﻿using ReactiveUI;
+﻿using System;
+using Avalonia.Media.Imaging;
+using Avalonia.Platform;
+using ReactiveUI;
 
 namespace flowersShop.Models;
 
@@ -12,6 +15,13 @@ public class CartItem : ReactiveObject
     public string Name { get; set; }
     
     public string ImagePath { get; set; }
+    
+    public Bitmap ImageBitmap =>
+        new Bitmap(
+            AssetLoader.Open(
+                new Uri(ImagePath)
+            )
+        );
 
     public int Quantity
     {
