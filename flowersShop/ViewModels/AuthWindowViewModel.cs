@@ -7,7 +7,7 @@ using MsBox.Avalonia.Enums;
 
 namespace flowersShop.ViewModels;
 
-public class AuthViewModel : ViewModelBase
+public class AuthWindowViewModel : ViewModelBase
 {
     private string login, password;
 

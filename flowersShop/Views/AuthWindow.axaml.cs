@@ -6,11 +6,11 @@ using flowersShop.ViewModels;
 
 namespace flowersShop.Views;
 
-public partial class Auth : Window
+public partial class AuthWindow : Window
 {
-    AuthViewModel vm =  new AuthViewModel();
+    AuthWindowViewModel vm =  new AuthWindowViewModel();
     
-    public Auth()
+    public AuthWindow()
     {
         InitializeComponent();
         DataContext = vm;
