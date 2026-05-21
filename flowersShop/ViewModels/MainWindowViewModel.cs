@@ -14,6 +14,7 @@ public class MainWindowViewModel : ViewModelBase
 {
     private bool _onlyAvailable;
     private decimal _totalPrice;
+    private string _addButtonText = "Добавить";
 
     public bool OnlyAvailable
     {
@@ -29,6 +30,12 @@ public class MainWindowViewModel : ViewModelBase
     {
         get => _totalPrice;
         set => this.RaiseAndSetIfChanged(ref _totalPrice, value);
+    }
+    
+    public string AddButtonText
+    {
+        get => _addButtonText;
+        set => this.RaiseAndSetIfChanged(ref _addButtonText, value);
     }
 
     public ObservableCollection<Flower> Flowers { get; set; } = new();
@@ -85,27 +92,79 @@ public class MainWindowViewModel : ViewModelBase
         var existingItem = CartItems
             .FirstOrDefault(x => x.Id == flower.Id);
 
-        if (existingItem != null)
+        if (existingItem != null) return;
+
+        CartItems.Add(new CartItem
         {
-            existingItem.Quantity++;
-        }
-        else
-        {
-            CartItems.Add(new CartItem
-            {
-                Id = flower.Id,
-                Name = flower.Name,
-                ImagePath = flower.ImagePath,
-                Price = flower.Price,
-                Quantity = 1
-            });
-        }
+            Id = flower.Id,
+            Name = flower.Name,
+            ImagePath = flower.ImagePath,
+            Price = flower.Price,
+            Quantity = 1
+        });
+        
+        flower.IsInCart = true;
         
         flower.Quantity--;
 
         LoadFlowers();
 
         UpdateTotal();
+    }
+
+    public void AddOneToCart(CartItem cartItem)
+    {
+        var flower = Flowers.FirstOrDefault(x => x.Id == cartItem.Id);
+        
+        if (flower != null && flower.Quantity > 0)
+        {
+            cartItem.Quantity++;
+            flower.Quantity--;
+            
+            LoadFlowers();
+            
+            UpdateTotal();
+        }
+    }
+
+    public void RemoveOneFromCart(CartItem cartItem)
+    {
+        var flower = Flowers.FirstOrDefault(x => x.Id == cartItem.Id);
+
+        if (flower != null)
+        {
+            cartItem.Quantity--;
+            flower.Quantity++;
+            
+            LoadFlowers();
+            
+            UpdateTotal();
+        }
+        
+        if (cartItem.Quantity == 0)
+        {
+            CartItems.Remove(CartItems.First(x => x.Id == cartItem.Id));
+            
+            flower.IsInCart = false;
+        }
+    }
+    
+    public void RemoveFromCart(CartItem cartItem)
+    {
+        var flower = Flowers.FirstOrDefault(x => x.Id == cartItem.Id);
+
+        if (flower != null)
+        {
+            CartItems.Remove(CartItems.First(x => x.Id == cartItem.Id));
+               
+            flower.IsInCart = false;
+            
+            flower.Quantity += cartItem.Quantity;
+            
+            LoadFlowers();
+            
+            UpdateTotal();
+        }
     }
 
     private void UpdateTotal()
