@@ -23,4 +23,34 @@ public partial class MainWindow : Window
             vm.AddToCart(flower);
         }
     }
+    
+    private void AddOneToCart_OnClick(object? sender, RoutedEventArgs e)
+    {
+        if (sender is Button button &&
+            button.DataContext is CartItem cartItem &&
+            DataContext is MainWindowViewModel vm)
+        {
+            vm.AddOneToCart(cartItem);
+        }
+    }
+    
+    private void RemoveOneFromCart_OnClick(object? sender, RoutedEventArgs e)
+    {
+        if (sender is Button button &&
+            button.DataContext is CartItem cartItem &&
+            DataContext is MainWindowViewModel vm)
+        {
+            vm.RemoveOneFromCart(cartItem);
+        }
+    }
+    
+    private void RemoveFromCart_OnClick(object? sender, RoutedEventArgs e)
+    {
+        if (sender is Button button &&
+            button.DataContext is CartItem cartItem &&
+            DataContext is MainWindowViewModel vm)
+        {
+            vm.RemoveFromCart(cartItem);
+        }
+    }
 }

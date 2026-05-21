@@ -105,8 +105,15 @@
                                     Text="{Binding Quantity, StringFormat='Остаток: {0}'}"/>
 
                                 <Button
-                                    Content="Добавить в корзину"
+                                    Content="{Binding AddButtonText}"
+                                    IsEnabled="{Binding CanAddToCart}"
                                     Height="40"
+                                    HorizontalContentAlignment="Center"
+                                    VerticalContentAlignment="Center"
+                                    FontSize="15"
+                                    FontWeight="600"
+                                    Foreground="#fff"
+                                    Background="#272727"
                                     Click="AddToCart_OnClick"/>
 
                             </StackPanel>
@@ -175,6 +182,50 @@
                                     <TextBlock
                                         Text="{Binding TotalPrice, StringFormat='Сумма: {0:F2} ₽'}"
                                         FontWeight="Bold"/>
+                                    <StackPanel Orientation="Horizontal" Spacing="3">
+                                        <Button
+                                            Content="-"
+                                            Height="40"
+                                            Width="40"
+                                            HorizontalContentAlignment="Center"
+                                            VerticalContentAlignment="Center"
+                                            FontSize="15"
+                                            FontWeight="600"
+                                            Foreground="#fff"
+                                            Background="#272727"
+                                            Click="RemoveOneFromCart_OnClick"/>
+                                        
+                                        <Button
+                                            Height="40"
+                                            Width="40"
+                                            HorizontalContentAlignment="Center"
+                                            VerticalContentAlignment="Center"
+                                            FontSize="15"
+                                            FontWeight="600"
+                                            Foreground="#fff"
+                                            Background="#272727"
+                                            Click="RemoveFromCart_OnClick">
+                                            
+                                            <Image
+                                                Width="18"
+                                                Height="18"
+                                                Source="avares://flowersShop/Assets/icons/trash.png"/>
+                                            
+                                        </Button>
+                                        
+                                        <Button
+                                            Content="+"
+                                            Height="40"
+                                            Width="40"
+                                            HorizontalContentAlignment="Center"
+                                            VerticalContentAlignment="Center"
+                                            FontSize="15"
+                                            FontWeight="600"
+                                            Foreground="#fff"
+                                            Background="#272727"
+                                            Click="AddOneToCart_OnClick"/>
+                                    </StackPanel>
+                                    
 
                                 </StackPanel>
 
