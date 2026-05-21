@@ -14,7 +14,7 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-    <Grid ColumnDefinitions="3*,1.2*"
+    <Grid ColumnDefinitions="3*,1*"
           Margin="15"
           ColumnSpacing="20">
 
@@ -70,9 +70,9 @@
                     <DataTemplate>
 
                         <Border
-                            Width="230"
+                            Width="270"
                             Margin="10"
-                            Padding="12"
+                            Padding="10"
                             BorderBrush="#D0D0D0"
                             BorderThickness="1"
                             CornerRadius="10">
@@ -80,9 +80,10 @@
                             <StackPanel Spacing="10">
 
                                 <Image
-                                    Height="150"
+                                    Height="250"
+                                    Width="250"
                                     Stretch="UniformToFill"
-                                    Source="{Binding ImagePath}"/>
+                                    Source="{Binding ImageBitmap}"/>
 
                                 <TextBlock
                                     Text="{Binding Name}"
@@ -147,18 +148,20 @@
                         <DataTemplate>
 
                             <Border
-                                Margin="0 0 0 10"
+                                Width="270"
+                                Margin="10"
                                 Padding="10"
                                 BorderBrush="#D0D0D0"
                                 BorderThickness="1"
-                                CornerRadius="8">
+                                CornerRadius="10">
 
                                 <StackPanel Spacing="8">
                                     
                                     <Image
-                                        Height="120"
+                                        Height="250"
+                                        Width="250"
                                         Stretch="UniformToFill"
-                                        Source="{Binding ImagePath}"/>
+                                        Source="{Binding ImageBitmap}"/>
                                     
                                     <TextBlock
                                         Text="{Binding Name}"
