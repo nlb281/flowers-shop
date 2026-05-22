@@ -257,7 +257,8 @@
                         FontWeight="SemiBold"
                         Foreground="#fff"
                         Background="#272727"
-                        Content="Оформить заказ"/>
+                        Content="Оформить заказ"
+                        Click="GoToCreateOrderWindow_OnClick"/>
 
                     <Button
                         Grid.Row="1"

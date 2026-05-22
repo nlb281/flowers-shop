@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using flowersShop.Models;
@@ -12,6 +13,7 @@ public partial class MainWindow : Window
         InitializeComponent();
         
         DataContext = new MainWindowViewModel();
+        StaticFields.oldWindow = this;
     }
     
     private void AddToCart_OnClick(object? sender, RoutedEventArgs e)
@@ -51,6 +53,14 @@ public partial class MainWindow : Window
             DataContext is MainWindowViewModel vm)
         {
             vm.RemoveFromCart(cartItem);
+        }
+    }
+    
+    private void GoToCreateOrderWindow_OnClick(object? sender, RoutedEventArgs e)
+    {
+        if (DataContext is MainWindowViewModel vm)
+        {
+            vm.GoToCreateOrderWindow(vm.CartItems);
         }
     }
 }

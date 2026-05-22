@@ -14,6 +14,6 @@ public partial class AuthWindow : Window
     {
         InitializeComponent();
         DataContext = vm;
-        StaticFields.oldWindow = this;
+        StaticFields.window = this;
     }
 }

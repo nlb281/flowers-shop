@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;  
 using System.Reactive;
 using flowersShop.Models;
+using flowersShop.Views;
 using MsBox.Avalonia;
 using MsBox.Avalonia.Enums;
 using ReactiveUI;
@@ -14,7 +15,6 @@ public class MainWindowViewModel : ViewModelBase
 {
     private bool _onlyAvailable;
     private decimal _totalPrice;
-    private string _addButtonText = "Добавить";
 
     public bool OnlyAvailable
     {
@@ -31,28 +31,15 @@ public class MainWindowViewModel : ViewModelBase
         get => _totalPrice;
         set => this.RaiseAndSetIfChanged(ref _totalPrice, value);
     }
-    
-    public string AddButtonText
-    {
-        get => _addButtonText;
-        set => this.RaiseAndSetIfChanged(ref _addButtonText, value);
-    }
 
     public ObservableCollection<Flower> Flowers { get; set; } = new();
 
     public ObservableCollection<CartItem> CartItems { get; set; } = new();
-
-    public ReactiveCommand<Unit, Unit> CreateOrderCommand { get; }
-
-    public ReactiveCommand<Unit, Unit> OpenOrdersCommand { get; }
+    
 
     public MainWindowViewModel()
     {
         LoadFlowers();
-
-        CreateOrderCommand = ReactiveCommand.Create(CreateOrder);
-
-        OpenOrdersCommand = ReactiveCommand.Create(OpenOrders);
 
         this.WhenAnyValue(x => x.CartItems.Count)
             .Subscribe(_ => UpdateTotal());
@@ -167,14 +154,30 @@ public class MainWindowViewModel : ViewModelBase
         }
     }
 
+    public async void GoToCreateOrderWindow(ObservableCollection<CartItem> cartItems)
+    {
+        if (CartItems.Count == 0)
+        { 
+            await MessageBoxManager
+                .GetMessageBoxStandard(
+                    "Information",
+                    "В корзине нет товаров",
+                    ButtonEnum.Ok)
+                .ShowWindowAsync();
+
+            return;
+        }
+
+        StaticFields.oldWindow?.Hide();
+
+        StaticFields.window = new CreateOrderWindow(cartItems);
+
+        StaticFields.window.Show();
+    }
+
     private void UpdateTotal()
     {
         TotalPrice = CartItems.Sum(x => x.TotalPrice);
-    }
-
-    private void CreateOrder()
-    {
-        // позже
     }
 
     private void OpenOrders()
