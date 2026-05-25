@@ -3,6 +3,8 @@ using System.Linq;
 using flowersShop.Models;
 using flowersShop.Views;
 using Microsoft.EntityFrameworkCore;
+using MsBox.Avalonia;
+using MsBox.Avalonia.Enums;
 
 namespace flowersShop.ViewModels;
 
@@ -34,6 +36,17 @@ public class AllOrdersWindowViewModel
 
     public void GoToChangeOrderStatus(Order order)
     {
+        if (StaticFields.user.Role.Name != "Администратор")
+        {
+             MessageBoxManager
+                .GetMessageBoxStandard(
+                    "Ошибка",
+                    "Изменение статуса заказа недоступно",
+                    ButtonEnum.Ok)
+                .ShowWindowAsync();
+             return;
+        }
+        
         StaticFields.previousWindow =
             StaticFields.window;
 

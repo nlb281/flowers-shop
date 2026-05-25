@@ -30,7 +30,7 @@ public class AuthWindowViewModel : ViewModelBase
 
         if (StaticFields.user == null)
         {
-            MessageBoxManager.GetMessageBoxStandard("Information", "Invalid login or password", ButtonEnum.Ok)
+            MessageBoxManager.GetMessageBoxStandard("Ошибка", "Неверный логин или пароль", ButtonEnum.Ok)
                 .ShowWindowAsync();
         }
         else
