@@ -4,11 +4,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModels="clr-namespace:flowersShop.ViewModels"
         mc:Ignorable="d"
-        d:DesignWidth="1200"
-        d:DesignHeight="750"
         x:Class="flowersShop.Views.AllOrdersWindow"
         x:DataType="viewModels:AllOrdersWindowViewModel"
-        Title="Все заказы">
+        Title="Все заказы"
+        Width="1440" 
+        Height="768"
+        WindowStartupLocation="CenterScreen">
 
     <Grid Margin="15"
           RowDefinitions="Auto,*"

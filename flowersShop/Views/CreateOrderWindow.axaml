@@ -7,7 +7,10 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="flowersShop.Views.CreateOrderWindow"
         x:DataType="viewModels:CreateOrderWindowViewModel"
-        Title="Оформление заказа">
+        Title="Оформление заказа"
+        Width="1440" 
+        Height="768"
+        WindowStartupLocation="CenterScreen">
 
     <Grid ColumnDefinitions="3*,1.1*"
           Margin="15"
