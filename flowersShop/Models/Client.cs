@@ -11,7 +11,7 @@ public partial class Client
 
     public string Phone { get; set; } = null!;
 
-    public string Mail { get; set; } = null!;
+    public string? Mail { get; set; } = null!;
 
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 }

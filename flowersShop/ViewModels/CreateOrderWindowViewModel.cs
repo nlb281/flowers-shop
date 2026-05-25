@@ -64,6 +64,11 @@ public class CreateOrderWindowViewModel : ViewModelBase
         get => _selectedCourier;
         set => this.RaiseAndSetIfChanged(ref _selectedCourier, value);
     }
+
+    public void ReloadClients()
+    {
+        LoadClients();
+    }
     
     private void LoadClients()
     {
@@ -212,6 +217,17 @@ public class CreateOrderWindowViewModel : ViewModelBase
         }
         
         GoToMainWindow();
+    }
+
+    public void GoToAddNewClientWindow()
+    {
+        StaticFields.previousWindow = StaticFields.window;
+        
+        StaticFields.window?.Hide();
+
+        StaticFields.window = new AddNewClientWindow();
+
+        StaticFields.window?.Show();
     }
     
     public void GoToMainWindow()

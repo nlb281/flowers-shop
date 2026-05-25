@@ -39,6 +39,14 @@ public partial class CreateOrderWindow : Window
         }
     }
     
+    private void GoToAddNewClientWindow_OnClick(object? sender, RoutedEventArgs e)
+    {
+        if (DataContext is CreateOrderWindowViewModel vm)
+        {
+            vm.GoToAddNewClientWindow();
+        }
+    }
+    
     private void CreateOrder_OnClick(object? sender, RoutedEventArgs e)
     {
         if (DataContext is CreateOrderWindowViewModel vm)

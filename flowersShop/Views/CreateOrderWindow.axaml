@@ -60,7 +60,8 @@
                         HorizontalAlignment="Left"
                         Background="Transparent"
                         BorderThickness="0"
-                        Foreground="Black">
+                        Foreground="Black"
+                        Click="GoToAddNewClientWindow_OnClick">
 
                         <TextBlock
                             Text="Добавить нового клиента"
