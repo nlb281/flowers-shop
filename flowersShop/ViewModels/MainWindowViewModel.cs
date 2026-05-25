@@ -153,6 +153,26 @@ public class MainWindowViewModel : ViewModelBase
             UpdateTotal();
         }
     }
+    
+    public void ClearCart()
+    {
+        foreach (var cartItem in CartItems)
+        {
+            var flower = Flowers
+                .FirstOrDefault(x => x.Id == cartItem.Id);
+
+            if (flower != null)
+            {
+                flower.IsInCart = false;
+            }
+        }
+
+        CartItems.Clear();
+
+        LoadFlowers();
+
+        UpdateTotal();
+    }
 
     public async void GoToCreateOrderWindow(ObservableCollection<CartItem> cartItems)
     {
@@ -168,9 +188,26 @@ public class MainWindowViewModel : ViewModelBase
             return;
         }
 
-        StaticFields.oldWindow?.Hide();
+        StaticFields.previousWindow =
+            StaticFields.window;
 
-        StaticFields.window = new CreateOrderWindow(cartItems);
+        StaticFields.window?.Hide();
+
+        StaticFields.window =
+            new CreateOrderWindow(cartItems);
+
+        StaticFields.window.Show();
+    }
+    
+    public void GoToAllOrdersWindow()
+    {
+        StaticFields.previousWindow =
+            StaticFields.window;
+
+        StaticFields.window?.Hide();
+
+        StaticFields.window =
+            new AllOrdersWindow();
 
         StaticFields.window.Show();
     }

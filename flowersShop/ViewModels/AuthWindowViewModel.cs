@@ -35,13 +35,15 @@ public class AuthWindowViewModel : ViewModelBase
         }
         else
         {
+            StaticFields.window?.Hide();
+
             var mainWindow = new MainWindow();
 
-            mainWindow.Show();
-
-            StaticFields.window?.Close();
-
             StaticFields.window = mainWindow;
+
+            StaticFields.mainWindow = mainWindow;
+
+            mainWindow.Show();
         }
     }
 }

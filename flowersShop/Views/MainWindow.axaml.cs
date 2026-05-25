@@ -1,5 +1,8 @@
+using System;
 using System.Collections.ObjectModel;
+using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Interactivity;
 using flowersShop.Models;
 using flowersShop.ViewModels;
@@ -13,7 +16,18 @@ public partial class MainWindow : Window
         InitializeComponent();
         
         DataContext = new MainWindowViewModel();
-        StaticFields.oldWindow = this;
+        StaticFields.window = this;
+    }
+    
+    protected override void OnClosed(EventArgs e)
+    {
+        base.OnClosed(e);
+
+        if (Application.Current?.ApplicationLifetime
+            is IClassicDesktopStyleApplicationLifetime desktop)
+        {
+            desktop.Shutdown();
+        }
     }
     
     private void AddToCart_OnClick(object? sender, RoutedEventArgs e)
@@ -61,6 +75,14 @@ public partial class MainWindow : Window
         if (DataContext is MainWindowViewModel vm)
         {
             vm.GoToCreateOrderWindow(vm.CartItems);
+        }
+    }
+    
+    private void GoToAllOrdersWindow_OnClick(object? sender, RoutedEventArgs e)
+    {
+        if (DataContext is MainWindowViewModel vm)
+        {
+            vm.GoToAllOrdersWindow();
         }
     }
 }

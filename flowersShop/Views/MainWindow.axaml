@@ -8,7 +8,7 @@
         d:DesignHeight="800"
         x:Class="flowersShop.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
-        Title="Flowers Shop">
+        Title="Список букетов">
 
     <Design.DataContext>
         <vm:MainWindowViewModel/>
@@ -268,7 +268,8 @@
                         VerticalContentAlignment="Center"
                         Background="Transparent"
                         BorderThickness="0"
-                        Foreground="Black">
+                        Foreground="Black"
+                        Click="GoToAllOrdersWindow_OnClick">
 
                         <TextBlock
                             Text="Все заказы"

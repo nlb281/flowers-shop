@@ -1,0 +1,180 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:flowersShop.ViewModels"
+        mc:Ignorable="d"
+        d:DesignWidth="1200"
+        d:DesignHeight="750"
+        x:Class="flowersShop.Views.AllOrdersWindow"
+        x:DataType="viewModels:AllOrdersWindowViewModel"
+        Title="Все заказы">
+
+    <Grid Margin="15"
+          RowDefinitions="Auto,*"
+          RowSpacing="15">
+        
+        <Grid Grid.Row="0"
+              ColumnDefinitions="*,Auto">
+
+            <TextBlock
+                Grid.Column="0"
+                Text="Все заказы"
+                FontSize="32"
+                FontWeight="Bold"
+                VerticalAlignment="Center"/>
+
+            <Button
+                Grid.Column="1"
+                Width="180"
+                Height="45"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                FontSize="15"
+                FontWeight="SemiBold"
+                Foreground="#fff"
+                Background="#272727"
+                Content="Вернуться назад"
+                Click="GoToMainWindow_OnClick"/>
+
+        </Grid>
+        
+        <Border Grid.Row="1"
+                Padding="10"
+                BorderBrush="#D0D0D0"
+                BorderThickness="1"
+                CornerRadius="10">
+
+            <Grid RowDefinitions="Auto,*">
+                
+                <Grid Grid.Row="0"
+                      ColumnDefinitions="70,220,160,220,140,120,180"
+                      Margin="18,0,0,10">
+
+                    <TextBlock
+                        Grid.Column="0"
+                        Text="ID"
+                        FontWeight="Bold"/>
+
+                    <TextBlock
+                        Grid.Column="1"
+                        Text="Клиент"
+                        FontWeight="Bold"/>
+
+                    <TextBlock
+                        Grid.Column="2"
+                        Text="Дата доставки"
+                        FontWeight="Bold"/>
+
+                    <TextBlock
+                        Grid.Column="3"
+                        Text="Адрес"
+                        FontWeight="Bold"/>
+
+                    <TextBlock
+                        Grid.Column="4"
+                        Text="Статус"
+                        FontWeight="Bold"/>
+
+                    <TextBlock
+                        Grid.Column="5"
+                        Text="Сумма"
+                        FontWeight="Bold"/>
+
+                    <TextBlock
+                        Grid.Column="6"
+                        Text="Действия"
+                        FontWeight="Bold"/>
+
+                </Grid>
+
+                <ListBox Grid.Row="1"
+                     ItemsSource="{Binding Orders}"
+                     BorderThickness="0"
+                     Background="Transparent"
+                     ScrollViewer.VerticalScrollBarVisibility="Auto">
+
+                    <ListBox.ItemTemplate>
+
+                        <DataTemplate>
+
+                            <Border
+                                Padding="10"
+                                Margin="0,0,0,10"
+                                BorderBrush="#E0E0E0"
+                                BorderThickness="1"
+                                CornerRadius="10">
+
+                                <Grid ColumnDefinitions="70,220,160,220,140,120,180">
+
+                                    <TextBlock
+                                        Grid.Column="0"
+                                        VerticalAlignment="Center"
+                                        Text="{Binding Id}"/>
+
+                                    <TextBlock
+                                        Grid.Column="1"
+                                        VerticalAlignment="Center"
+                                        Text="{Binding Client.Fio}"/>
+
+                                    <TextBlock
+                                        Grid.Column="2"
+                                        VerticalAlignment="Center"
+                                        Text="{Binding DeliveryDate}"/>
+
+                                    <TextBlock
+                                        Grid.Column="3"
+                                        VerticalAlignment="Center"
+                                        Text="{Binding Address}"/>
+
+                                    <Border
+                                        Grid.Column="4"
+                                        Background="#E8F5E9"
+                                        CornerRadius="8"
+                                        Padding="8,4"
+                                        HorizontalAlignment="Left">
+
+                                        <TextBlock
+                                            Text="{Binding Status}"
+                                            Foreground="#2E7D32"
+                                            FontWeight="SemiBold"/>
+
+                                    </Border>
+
+                                    <TextBlock
+                                        Grid.Column="5"
+                                        VerticalAlignment="Center"
+                                        FontWeight="Bold"
+                                        Text="{Binding TotalPrice, StringFormat='{}{0:F2} ₽'}"/>
+
+                                    <Button
+                                        Grid.Column="6"
+                                        Width="150"
+                                        Height="35"
+                                        HorizontalAlignment="Left"
+                                        HorizontalContentAlignment="Center"
+                                        VerticalContentAlignment="Center"
+                                        FontSize="13"
+                                        FontWeight="SemiBold"
+                                        Foreground="White"
+                                        Background="#272727"
+                                        Content="Изменить статус"
+                                        Click="GoToChangeOrderStatus_OnClick"/>
+
+                                </Grid>
+
+                            </Border>
+
+                        </DataTemplate>
+
+                    </ListBox.ItemTemplate>
+
+                </ListBox>
+
+            </Grid>
+
+        </Border>
+
+    </Grid>
+
+</Window>

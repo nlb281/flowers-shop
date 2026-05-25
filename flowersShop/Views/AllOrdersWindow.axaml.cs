@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
@@ -10,14 +9,13 @@ using flowersShop.ViewModels;
 
 namespace flowersShop.Views;
 
-public partial class CreateOrderWindow : Window
+public partial class AllOrdersWindow : Window
 {
-    public CreateOrderWindow(
-        ObservableCollection<CartItem> cartItems)
+    public AllOrdersWindow()
     {
         InitializeComponent();
-        
-        DataContext = new CreateOrderWindowViewModel(cartItems);
+
+        DataContext = new AllOrdersWindowViewModel();
     }
     
     protected override void OnClosed(EventArgs e)
@@ -33,17 +31,19 @@ public partial class CreateOrderWindow : Window
     
     private void GoToMainWindow_OnClick(object? sender, RoutedEventArgs e)
     {
-        if (DataContext is CreateOrderWindowViewModel vm)
+        if (DataContext is AllOrdersWindowViewModel vm)
         {
             vm.GoToMainWindow();
         }
     }
     
-    private void CreateOrder_OnClick(object? sender, RoutedEventArgs e)
+    private void GoToChangeOrderStatus_OnClick(object? sender, RoutedEventArgs e)
     {
-        if (DataContext is CreateOrderWindowViewModel vm)
+        if (sender is Button button &&
+            button.DataContext is Order order &&
+            DataContext is AllOrdersWindowViewModel vm)
         {
-            vm.CreateOrder();
+            vm.GoToChangeOrderStatus(order);
         }
     }
 }

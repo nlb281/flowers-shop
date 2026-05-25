@@ -197,17 +197,6 @@ public class CreateOrderWindowViewModel : ViewModelBase
         SelectedCourier.IsFree = "false";
 
         StaticFields.context.SaveChanges();
-        
-        foreach (var cartItem in CartItems)
-        {
-            var flower = StaticFields.context.Flowers
-                .FirstOrDefault(x => x.Id == cartItem.Id);
-
-            if (flower != null)
-            {
-                flower.IsInCart = false;
-            }
-        }
 
         await MessageBoxManager
             .GetMessageBoxStandard(
@@ -216,14 +205,22 @@ public class CreateOrderWindowViewModel : ViewModelBase
                 ButtonEnum.Ok)
             .ShowWindowAsync();
 
-        CartItems.Clear();
-
+        if (StaticFields.mainWindow?.DataContext
+            is MainWindowViewModel vm)
+        {
+            vm.ClearCart();
+        }
+        
         GoToMainWindow();
     }
     
     public void GoToMainWindow()
     {
-        StaticFields.oldWindow?.Show();
-        StaticFields.window?.Close();
+        StaticFields.window?.Hide();
+
+        StaticFields.window =
+            StaticFields.mainWindow;
+
+        StaticFields.window?.Show();
     }
 }

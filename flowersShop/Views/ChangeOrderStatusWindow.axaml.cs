@@ -8,15 +8,11 @@ using flowersShop.ViewModels;
 
 namespace flowersShop.Views;
 
-public partial class AuthWindow : Window
+public partial class ChangeOrderStatusWindow : Window
 {
-    AuthWindowViewModel vm =  new AuthWindowViewModel();
-    
-    public AuthWindow()
+    public ChangeOrderStatusWindow()
     {
         InitializeComponent();
-        DataContext = vm;
-        StaticFields.window = this;
     }
     
     protected override void OnClosed(EventArgs e)
@@ -28,5 +24,13 @@ public partial class AuthWindow : Window
         {
             desktop.Shutdown();
         }
+    }
+
+    public ChangeOrderStatusWindow(Order order)
+    {
+        InitializeComponent();
+
+        DataContext =
+            new ChangeOrderStatusWindowViewModel(order);
     }
 }
